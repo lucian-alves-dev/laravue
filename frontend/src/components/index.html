@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laravue</title>
+    <link defer href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/plugins/flex-table-list.css">
+    <link rel="stylesheet" href="/app.css">
+</head>
+
+<body id="app">
+    <header id="app-header">
+        <nav>
+            <a class="menu-item" href="#">
+                <span class="icon material-icons">menu</span>
+                <span class="txt">Menu Principal</span>
+            </a>
+            <a class="menu-item selected" href="#">
+                <span class="icon material-icons">people</span>
+                <span class="txt">Usuários</span>
+            </a>
+            <a class="menu-item" href="#">
+                <span class="icon material-icons">question_answer</span>
+                <span class="txt">Conversas</span>
+            </a>
+            <a class="menu-item" href="#">
+                <span class="icon material-icons">paid</span>
+                <span class="txt">Pagamentos</span>
+            </a>
+            <a class="menu-item" href="#">
+                <span class="icon material-icons">trending_up</span>
+                <span class="txt">Tendências</span>
+            </a>
+            <a class="menu-item" href="#">
+                <span class="icon material-icons">rocket_launch</span>
+                <span class="txt">Performance</span>
+            </a>
+            <a class="menu-item" href="#">
+                <span class="icon material-icons">security</span>
+                <span class="txt">Segurança</span>
+            </a>
+        </nav>
+    </header>
+    <main id="app-content">
+
+        <div class="app-limits">
+            <header class="page-header">
+                <h1>Usuários</h1>
+                <div class="box-buttons">
+                    <a class="btn secondary" href="#">Exportar Registros</a>
+                    <a class="btn primary" href="#">Criar Usuário</a>
+                </div>
+            </header>
+
+            <div class="box">
+                <form class="form">
+                    <div class="form-row">
+                        <div class="form-col grow">
+                            <label>Nome</label>
+                            <input type="text" name="name">
+                        </div>
+                        <div class="form-col">
+                            <label>Email</label>
+                            <input type="text" name="email">
+                        </div>
+                        <div class="form-col">
+                            <label>Celular</label>
+                            <input type="text" name="cellphone">
+                        </div>
+                        <div class="form-col">
+                            <label>&nbsp;</label>
+                            <button class="btn secondary" type="submit">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="box">
+                <table class="flex-table-list">
+                    <thead>
+                        <tr>
+                            <th width="1"></th>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Celular</th>
+                            <th>Cadastrado em</th>
+                            <th width="1"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img class="user-photo"
+                                    src="https://revistatudo.com.br/wp-content/uploads/2020/08/Cr%C3%A9dito-da-foto-Gustavo-Arrais_Marina_Person_02-12-2015_3887.jpg"
+                                    alt=""></td>
+                            <td data-label="Nome: ">Maria Person da Silva</td>
+                            <td data-label="E-mail: ">maria@laravue.com</td>
+                            <td data-label="Celular: ">(14) 99758-9986</td>
+                            <td data-label="Cadastrado em: ">20/04/2022 14:20</td>
+                            <td>
+                                <div class="btn-drop-down">
+                                    <div class="txt"><span class="icon material-icons">more_horiz</span></div>
+                                    <nav class="list">
+                                        <a href="#">Editar</a>
+                                        <a href="#">Excluir</a>
+                                    </nav>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><img class="user-photo"
+                                    src="https://revistatudo.com.br/wp-content/uploads/2020/08/Cr%C3%A9dito-da-foto-Gustavo-Arrais_Marina_Person_02-12-2015_3887.jpg"
+                                    alt=""></td>
+                            <td data-label="Nome: ">Maria Person da Silva</td>
+                            <td data-label="E-mail: ">maria@laravue.com</td>
+                            <td data-label="Celular: ">(14) 99758-9986</td>
+                            <td data-label="Cadastrado em: ">20/04/2022 14:20</td>
+                            <td>
+                                <div class="btn-drop-down">
+                                    <div class="txt"><span class="icon material-icons">more_horiz</span></div>
+                                    <nav class="list">
+                                        <a href="#">Editar</a>
+                                        <a href="#">Excluir</a>
+                                    </nav>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><img class="user-photo"
+                                    src="https://revistatudo.com.br/wp-content/uploads/2020/08/Cr%C3%A9dito-da-foto-Gustavo-Arrais_Marina_Person_02-12-2015_3887.jpg"
+                                    alt=""></td>
+                            <td data-label="Nome: ">Maria Person da Silva</td>
+                            <td data-label="E-mail: ">maria@laravue.com</td>
+                            <td data-label="Celular: ">(14) 99758-9986</td>
+                            <td data-label="Cadastrado em: ">20/04/2022 14:20</td>
+                            <td>
+                                <div class="btn-drop-down">
+                                    <div class="txt"><span class="icon material-icons">more_horiz</span></div>
+                                    <nav class="list">
+                                        <a href="#">Editar</a>
+                                        <a href="#">Excluir</a>
+                                    </nav>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <footer class="page-footer">
+                <div class="info">
+                    <span>125</span> registros encontrados
+                </div>
+                <nav class="box-paginator">
+                    <a class="item" href="#">&lsaquo;</a>
+                    <a class="item current" href="#">1</a>
+                    <a class="item" href="#">2</a>
+                    <a class="item" href="#">3</a>
+                    <a class="item" href="#">&rsaquo;</a>
+                </nav>
+            </footer>
+        </div>
+
+    </main>
+</body>
+</html>
