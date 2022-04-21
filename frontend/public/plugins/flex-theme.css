@@ -36,7 +36,7 @@ body {
     flex-grow: 1 !important;
 }
 
-#app-header {
+#app-menu {
     display: flex;
     flex-direction: column;
     background-image: linear-gradient(var(--primary-color), var(--secondary-color));
@@ -51,15 +51,15 @@ body {
     height: 100%;
 }
 
-#app-header:hover {
+#app-menu:hover {
     max-width: 200px;
 }
 
-#app-header a {
+#app-menu a {
     text-decoration: none;
 }
 
-#app-header nav .menu-item {
+#app-menu nav .item {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -69,13 +69,13 @@ body {
     min-width: max-content;
 }
 
-#app-header nav .menu-item .txt {
+#app-menu nav .item .txt {
     font-weight: 600;
     font-size: 80%;
     padding-right: 20px;
 }
 
-#app-header .menu-item .icon {
+#app-menu .item .icon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,11 +83,11 @@ body {
     width: 50px;
 }
 
-#app-header .menu-item:hover {
+#app-menu .item:hover {
     background-color: rgb(255 255 255 / 10%);
 }
 
-#app-header .menu-item.selected::before {
+#app-menu .item.selected::before {
     content: "";
     width: 4px;
     height: 100%;
@@ -124,19 +124,7 @@ body {
     margin: 0;
 }
 
-.page-footer {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: space-between;
-    margin: 30px;
-    margin-top: 0;
-}
 
-.page-footer .info {
-    font-size: 90%;
-    padding: 10px;
-}
 
 .box-buttons {
     display: flex;
@@ -327,7 +315,21 @@ table .btn-drop-down {
     text-decoration: underline;
 }
 
-.box-paginator {
+.app-paginator {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px;
+    margin-top: 0;
+}
+
+.app-paginator .info {
+    font-size: 90%;
+    padding: 10px;
+}
+
+.app-paginator .navigator {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -335,7 +337,7 @@ table .btn-drop-down {
     text-align: center;
 }
 
-.box-paginator .item {
+.app-paginator .navigator .item {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -347,11 +349,11 @@ table .btn-drop-down {
     font-size: 80%;
 }
 
-.box-paginator .item.current {
+.app-paginator .navigator .item.current {
     border: 1px solid #777;
 }
 
-.box-paginator .item:hover {
+.app-paginator .navigator .item:hover {
     color: var(--secondary-color);
     border-color: var(--secondary-color);
 }
@@ -362,7 +364,7 @@ table .btn-drop-down {
         font-size: 80%;
     }
     .page-header,
-    .page-footer {
+    .app-paginator {
         justify-content: center;
     }
     .box-buttons > *,
