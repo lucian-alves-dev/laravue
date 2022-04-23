@@ -1,5 +1,5 @@
 <template>
-    <form class="form">
+    <form id="formSearch" class="form" @submit="$event.preventDefault(); $emit('submit')">
         <div class="form-row">
             <div class="form-col grow">
                 <label>Nome</label>
@@ -23,6 +23,7 @@
 
 <script>
 export default {
-    name: 'UserForm'
+    name: 'UserForm',
+    emits: ['submit']
 }
 </script>

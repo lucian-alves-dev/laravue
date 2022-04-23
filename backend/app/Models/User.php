@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utils\Formatter;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -20,4 +21,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public static function search($form)
+    {
+        $query = User::query();
+        if(! empty($form['name'])) $query->where('name', 'LIKE', '%'. $form['name'] .'%');
+        if(! empty($form['email'])) $query->where('email', 'LIKE', '%'. $form['email'] .'%');
+        if(! empty($form['cellphone'])) $query->where('cellphone', 'LIKE', '%'. Formatter::onlyNumbers($form['cellphone']).'%');
+        return $query;
+    }
 }

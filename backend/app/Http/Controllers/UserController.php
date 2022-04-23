@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\CustomResponse;
+use App\Http\Responses\CustomResponse;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserPatchRequest;
 use App\Models\User;
-use App\Validators\UserValidator;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(20);
+        $form = $request->all();
+        $users = User::search($form)->paginate(20);
         return CustomResponse::success(content: $users);
     }
 
@@ -23,16 +25,15 @@ class UserController extends BaseController
 
     public function store(Request $request)
     {
-        $validator = UserValidator::validate($request);
-        if ($validator->errors()->count() > 0) {
+        $validator = UserStoreRequest::validate($request);
+        if ($validator->fails()) {
             return CustomResponse::error(
                 errors: $validator->errors()->all(),
                 msg: 'Não foi possível criar o usuário.'
             );
         }
 
-        $user = User::create($validator->customValidated);
-
+        $user = User::create($validator->validated());
         return CustomResponse::success(
             content: $user->toArray(),
             msg: 'Usuário criado com sucesso.'
@@ -44,16 +45,15 @@ class UserController extends BaseController
         $user = User::find($id);
         if(! $user) return CustomResponse::error(msg: 'Usuário não encontrado.');
 
-        $validator = UserValidator::validate($request, $user);
-        if ($validator->errors()->count() > 0) {
+        $validator = UserPatchRequest::validate($request, $user);
+        if ($validator->fails()) {
             return CustomResponse::error(
                 errors: $validator->errors()->all(),
                 msg: 'Não foi possível alterar os dados do usuário.'
             );
         }
 
-        $user->update($validator->customValidated);
-
+        $user->update($validator->validated());
         return CustomResponse::success(
             content: $user->toArray(),
             msg: 'Dados do usuário alterados com sucesso.'

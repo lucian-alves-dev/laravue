@@ -1,17 +1,17 @@
 <template>
     <app-menu></app-menu>
-    <app-content></app-content>
+    <user-page></user-page>
 </template>
 
 <script>
     import AppMenu from "./components/AppMenu.vue";
-    import AppContent from "./components/AppContent.vue";
+    import UserPage from "./pages/users/UserPage.vue";
 
     export default {
         name: "App",
         components: {
             AppMenu,
-            AppContent,
+            UserPage,
         },
     };
 </script>
