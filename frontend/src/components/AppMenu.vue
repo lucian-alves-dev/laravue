@@ -1,7 +1,7 @@
 <template>
     <header id="app-menu">
         <nav>
-            <a class="item" href="#">
+            <a class="item menu-icon" href="#">
                 <span class="icon material-icons">menu</span>
                 <span class="txt">Menu Principal</span>
             </a>

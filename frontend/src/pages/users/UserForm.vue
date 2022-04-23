@@ -1,5 +1,5 @@
 <template>
-    <form id="formSearch" class="form" @submit="$event.preventDefault(); $emit('submit')">
+    <form id="formSearch" class="form" @submit="preSubmit($event)">
         <div class="form-row">
             <div class="form-col grow">
                 <label>Nome</label>
@@ -24,6 +24,13 @@
 <script>
 export default {
     name: 'UserForm',
-    emits: ['submit']
+    emits: ['submit'],
+    methods: {
+        preSubmit(event) {
+            event.preventDefault();
+            let form = document.querySelector("#formSearch");
+            this.$emit('submit', new FormData(form));
+        }
+    }
 }
 </script>

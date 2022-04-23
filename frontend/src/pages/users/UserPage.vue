@@ -10,45 +10,57 @@
             </header>
 
             <div class="box">
-                <user-form @submit="refresh()"></user-form>
+                <user-form :data="formData" @submit="onFormSubmit"></user-form>
             </div>
 
             <div class="box">
-                <user-table :users="users"></user-table>
+                <user-table :data="tableData"></user-table>
             </div>
 
-            <app-paginator></app-paginator>
+            <app-paginator :data="paginatorData" @change="onPaginatorChange"></app-paginator>
         </div>
     </main>
 </template>
 
 <script>
+    import AppApi from "./../../components/AppApi.vue";
     import AppPaginator from "../../components/AppPaginator.vue";
     import UserForm from "./UserForm.vue";
     import UserTable from "./UserTable.vue";
-    import AppApi from "./../../components/AppApi.vue";
 
     export default {
         name: "AppContent",
         components: {
             AppPaginator,
             UserForm,
-            UserTable
+            UserTable,
         },
         data() {return{
-            users: []
+            formData: new FormData(),
+            paginatorData: [],
+            tableData: [],
         }},
         methods: {
             refresh() {
 
-                let form = document.querySelector("#formSearch");
-                let formData = new FormData(form);
-
-                AppApi.request("get", "users", formData)
+                AppApi.request("get", "users", this.formData)
                 .then((response) => {
-                    this.users = response.content.data;
+                    this.tableData = response.content.data;
+                    this.paginatorData = {
+                        links: response.content.links,
+                        total: response.content.total,
+                    }
                 });
+
             },
+            onFormSubmit(formData) {
+                this.formData = formData;
+                this.refresh();
+            },
+            onPaginatorChange(page) {
+                this.formData.append("page", page);
+                this.refresh();
+            }
         },
         mounted() {
             this.refresh();

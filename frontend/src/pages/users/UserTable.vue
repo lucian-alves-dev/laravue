@@ -11,7 +11,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="user in users" :key="user.id">
+            <tr v-for="user in data" :key="user.id">
                 <td>
                     <img class="user-photo" src="{{ user.photo }}" alt="" />
                 </td>
@@ -39,7 +39,7 @@
     export default {
         name: "UserTable",
         props: {
-            users: Array,
+            data: Array,
         },
     };
 </script>
