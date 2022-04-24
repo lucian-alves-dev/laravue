@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Responses\CustomResponse;
 use App\Http\Requests\UserStoreRequest;
-use App\Http\Requests\UserPatchRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
@@ -45,7 +45,7 @@ class UserController extends BaseController
         $user = User::find($id);
         if(! $user) return CustomResponse::error(msg: 'Usuário não encontrado.');
 
-        $validator = UserPatchRequest::validate($request, $user);
+        $validator = UserUpdateRequest::validate($request, $user);
         if ($validator->fails()) {
             return CustomResponse::error(
                 errors: $validator->errors()->all(),

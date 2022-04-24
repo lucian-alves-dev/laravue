@@ -23,7 +23,7 @@
 
 <script>
 export default {
-    name: 'UserForm',
+    name: 'UserFormSearch',
     emits: ['submit'],
     methods: {
         preSubmit(event) {

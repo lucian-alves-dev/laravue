@@ -27,7 +27,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         $query = User::query();
         if(! empty($form['name'])) $query->where('name', 'LIKE', '%'. $form['name'] .'%');
         if(! empty($form['email'])) $query->where('email', 'LIKE', '%'. $form['email'] .'%');
-        if(! empty($form['cellphone'])) $query->where('cellphone', 'LIKE', '%'. Formatter::onlyNumbers($form['cellphone']).'%');
+        if(! empty($form['cellphone'])) $query->where('cellphone', 'LIKE', '%'. Formatter::onlyDigits($form['cellphone']).'%');
         return $query;
     }
 }
