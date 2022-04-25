@@ -11,4 +11,5 @@ $router->group(['prefix' => 'users'], function () use ($router) {
     $router->put('/{id}', ['uses' => 'UserController@update']);
     $router->patch('/{id}', ['uses' => 'UserController@update']);
     $router->delete('/{id}', ['uses' => 'UserController@delete']);
+    $router->post('/{id}/photo', ['uses' => 'UserController@photo']);
 });

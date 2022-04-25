@@ -13,7 +13,7 @@
         <tbody>
             <tr v-for="user in data" :key="user.id">
                 <td>
-                    <img class="user-photo" src="{{ user.photo }}" alt="" />
+                    <img class="user-photo" :src="this.Api.baseUrl + (user.photo || 'files/user/nophoto.svg')" alt=""/>
                 </td>
                 <td data-label="Nome: ">{{ user.name }}</td>
                 <td data-label="E-mail: ">{{ user.email }}</td>

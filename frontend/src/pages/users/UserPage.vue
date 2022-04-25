@@ -17,7 +17,7 @@
                 <user-table :data="tableData" @delete="deleteUser" @edit="showUserEditModal"></user-table>
             </div>
 
-            <app-paginator :data="paginatorData" @change="onPaginatorChange"></app-paginator>
+            <page-paginator :data="paginatorData" @change="onPaginatorChange"></page-paginator>
             <user-modal ref="UserModal" @submit="saveUser"></user-modal>
 
         </div>
@@ -25,8 +25,7 @@
 </template>
 
 <script>
-    import AppApi from "@/components/AppApi.vue";
-    import AppPaginator from "@/components/AppPaginator.vue";
+    import PagePaginator from "@/components/PagePaginator.vue";
     import UserFormSearch from "./UserFormSearch.vue";
     import UserTable from "./UserTable.vue";
     import UserModal from "./UserModal.vue";
@@ -34,7 +33,7 @@
     export default {
         name: "AppContent",
         components: {
-            AppPaginator,
+            PagePaginator,
             UserFormSearch,
             UserTable,
             UserModal,
@@ -48,7 +47,7 @@
             refresh() {
 
                 this.FlexLoader.show("Carregando usuários...");
-                AppApi.request("get", "users", this.formSearchData)
+                this.Api.request("get", "users", this.formSearchData)
                 .then((response) => {
                     this.tableData = response.content.data;
                     this.paginatorData = {
@@ -76,8 +75,13 @@
                 }
 
                 this.FlexLoader.show("Salvando usuário...");
-                AppApi.request(method, url, formRegisterData)
-                .then(() => {
+                this.Api.request(method, url, formRegisterData)
+                .then((response) => {
+
+                    if(formRegisterData.get('photo')) {
+                        this.uploadPhoto(response.content, formRegisterData.get('photo'));
+                    }
+
                     this.hideUserModal();
                     this.refresh();
                 })
@@ -90,11 +94,10 @@
                 });
 
             },
-            deleteUser(user)
-            {
+            deleteUser(user) {
 
                 this.FlexLoader.show("Excluindo usuário...");
-                AppApi.request("delete", "users/" + user.id)
+                this.Api.request("delete", "users/" + user.id)
                 .then(() => {
                     this.hideUserModal();
                     this.refresh();
@@ -105,6 +108,21 @@
                 })
                 .finally(() => {
                     this.FlexLoader.hide();
+                });
+
+            },
+            uploadPhoto(user, file) {
+
+                let formData = new FormData();
+                formData.append("photo", file);
+
+                return this.Api.fileUpload(`users/${user.id}/photo`, formData)
+                .then((response) => {
+                    console.info(response);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert("Erro ao salvar a foto do usuário.");
                 });
 
             },

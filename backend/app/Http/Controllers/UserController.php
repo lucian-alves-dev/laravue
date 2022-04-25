@@ -63,7 +63,27 @@ class UserController extends BaseController
     public function delete($id)
     {
         $user = User::find($id);
-        if($user) $user->delete();
+        if($user) {
+            @unlink(app()->basePath() . "/public/$user->photo");
+            $user->delete();
+        }
         return CustomResponse::success(msg: 'Usuário excluído com sucesso.');
+    }
+
+    public function photo($id, Request $request)
+    {
+        $user = User::find($id);
+        if(! $user) return CustomResponse::error(msg: 'Usuário não encontrado.');
+        if (! $request->hasFile('photo')) return CustomResponse::error(msg: 'Imagem não recebida (campo photo).');
+        @unlink(app()->basePath() . "/public/$user->photo");
+
+        $photo = $request->file('photo');
+        $extension = substr(strrchr($photo->getClientOriginalName(), '.'), 1);
+        $info = $photo->move('files/user', "photo$user->id.$extension");
+
+        $user->photo = $info->getPathname();
+        $user->save();
+
+        return CustomResponse::success(msg: 'Foto salva com sucesso.');
     }
 }
