@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Responses\CustomResponse;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class HomeController extends BaseController
 {
-    public function doc()
+    public function index()
     {
-        return response()->json(['name' => 'Abigail', 'state' => 'CA']);
+        return CustomResponse::success(msg: 'API is ready!');
     }
 }

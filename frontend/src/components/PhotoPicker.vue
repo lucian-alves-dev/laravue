@@ -81,7 +81,7 @@
         },
         updated() {
             this.$el.querySelector("*[name='photo']").value = null;
-            this.$el.querySelector("img").src = this.img;
+            this.$el.querySelector("img").src = this.Api.baseUrl + (this.img || "files/user/nophoto.svg");
         }
     };
 </script>

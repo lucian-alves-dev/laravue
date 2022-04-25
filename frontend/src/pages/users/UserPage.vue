@@ -78,12 +78,15 @@
                 this.Api.request(method, url, formRegisterData)
                 .then((response) => {
 
-                    if(formRegisterData.get('photo')) {
-                        this.uploadPhoto(response.content, formRegisterData.get('photo'));
-                    }
+                    let photo = formRegisterData.get('photo');
+                    let user = response.content;
 
+                    if(user && user.id && photo && photo.size > 0) {
+                        this.uploadPhoto(user, photo);
+                    }
+                    
                     this.hideUserModal();
-                    this.refresh();
+
                 })
                 .catch((error) => {
                     console.error(error);
@@ -91,6 +94,7 @@
                 })
                 .finally(() => {
                     this.FlexLoader.hide();
+                    this.refresh();
                 });
 
             },
@@ -117,9 +121,6 @@
                 formData.append("photo", file);
 
                 return this.Api.fileUpload(`users/${user.id}/photo`, formData)
-                .then((response) => {
-                    console.info(response);
-                })
                 .catch((error) => {
                     console.error(error);
                     alert("Erro ao salvar a foto do usuário.");

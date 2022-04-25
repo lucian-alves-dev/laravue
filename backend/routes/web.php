@@ -2,7 +2,7 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
-$router->get('/', ['uses' => 'HomeController@doc']);
+$router->get('/', ['uses' => 'HomeController@index']);
 
 $router->group(['prefix' => 'users'], function () use ($router) {
     $router->get('/', ['uses' => 'UserController@index']);
